@@ -14,10 +14,12 @@ import {
 })
 export class LoginComponent {
   validateForm: FormGroup<{
+    name: FormControl<string>;
     userName: FormControl<string>;
     password: FormControl<string>;
     remember: FormControl<boolean>;
   }> = this.fb.group({
+    name: ['', [Validators.required]],
     userName: ['', [Validators.required]],
     password: ['', [Validators.required]],
     remember: [true],
