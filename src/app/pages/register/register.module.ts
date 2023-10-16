@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginRoutingModule } from './login.routing.module';
+import { LoginRoutingModule } from './register.routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
-import { LoginComponent } from './login.component';
+import { RegisterComponent } from './register.component';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [RegisterComponent],
   imports: [
     CommonModule,
     LoginRoutingModule,
@@ -18,4 +18,4 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzButtonModule,
   ],
 })
-export class LoginModule {}
+export class RegisterModule {}

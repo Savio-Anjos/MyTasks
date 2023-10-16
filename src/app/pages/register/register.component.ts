@@ -9,10 +9,10 @@ import {
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass'],
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.sass'],
 })
-export class LoginComponent {
+export class RegisterComponent {
   validateForm: FormGroup<{
     name: FormControl<string>;
     userName: FormControl<string>;

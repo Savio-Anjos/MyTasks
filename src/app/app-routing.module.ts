@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginModule } from './pages/login/login.module';
+import { RegisterModule } from './pages/register/register.module';
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: 'register',
     loadChildren: () =>
-      import('./pages/login/login.module').then((m) => m.LoginModule),
+      import('./pages/register/register.module').then((m) => m.RegisterModule),
   },
 ];
 
