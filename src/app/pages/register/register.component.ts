@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { RegisterService } from './register.service';
 import { IUser } from 'src/app/interfaces/user.interface';
+import { UserService } from './../../shared/user.service';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,8 @@ export class RegisterComponent {
 
   constructor(
     private fb: NonNullableFormBuilder,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private userService: UserService
   ) {}
 
   public submitForm(): void {
@@ -41,7 +43,9 @@ export class RegisterComponent {
       };
 
       this.registerService.createUser(user).subscribe((success: IUser) => {
-        console.log(success);
+        this.userService.setUser(success);
+        const savedUser: IUser = this.userService.getUser();
+        console.log(savedUser);
       });
     } else {
       Object.values(this.userForm.controls).forEach((control) => {
