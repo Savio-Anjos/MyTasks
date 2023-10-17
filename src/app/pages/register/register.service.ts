@@ -7,7 +7,7 @@ import { IUser } from 'src/app/interfaces/user.interface';
   providedIn: 'root',
 })
 export class RegisterService {
-  private readonly API: string = 'http://localhost:8080';
+  private readonly API: string = 'http://localhost:8080/users/';
 
   constructor(private http: HttpClient) {}
 

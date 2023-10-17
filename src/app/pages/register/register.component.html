@@ -1,7 +1,7 @@
 <div class="container">
   <form
     nz-form
-    [formGroup]="validateForm"
+    [formGroup]="userForm"
     class="login-form"
     (ngSubmit)="submitForm()"
   >
@@ -23,7 +23,7 @@
           <input
             type="text"
             nz-input
-            formControlName="userName"
+            formControlName="username"
             placeholder="Username"
           />
         </nz-input-group>

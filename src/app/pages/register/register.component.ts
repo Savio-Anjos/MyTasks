@@ -6,6 +6,8 @@ import {
   NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
+import { RegisterService } from './register.service';
+import { IUser } from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-login',
@@ -13,23 +15,36 @@ import {
   styleUrls: ['./register.component.sass'],
 })
 export class RegisterComponent {
-  validateForm: FormGroup<{
+  userForm: FormGroup<{
     name: FormControl<string>;
-    userName: FormControl<string>;
+    username: FormControl<string>;
     password: FormControl<string>;
-    remember: FormControl<boolean>;
   }> = this.fb.group({
     name: ['', [Validators.required]],
-    userName: ['', [Validators.required]],
+    username: ['', [Validators.required]],
     password: ['', [Validators.required]],
-    remember: [true],
   });
 
-  submitForm(): void {
-    if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
+  constructor(
+    private fb: NonNullableFormBuilder,
+    private registerService: RegisterService
+  ) {}
+
+  public submitForm(): void {
+    if (this.userForm.valid) {
+      console.log('submit', this.userForm.value);
+
+      const user: IUser = {
+        name: this.userForm.value.name,
+        username: this.userForm.value.username,
+        password: this.userForm.value.password,
+      };
+
+      this.registerService.createUser(user).subscribe((success: IUser) => {
+        console.log(success);
+      });
     } else {
-      Object.values(this.validateForm.controls).forEach((control) => {
+      Object.values(this.userForm.controls).forEach((control) => {
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
@@ -37,6 +52,4 @@ export class RegisterComponent {
       });
     }
   }
-
-  constructor(private fb: NonNullableFormBuilder) {}
 }
