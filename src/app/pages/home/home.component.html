@@ -1,47 +1,33 @@
 <nz-layout>
   <nz-header class="header">Header</nz-header>
 
-  <nz-content>
-    <nz-input-group [nzSuffix]="inputClearTpl">
-      <input
-        type="text"
-        nz-input
-        [(ngModel)]="inputValue"
-        placeholder="input with clear icon"
-      />
-    </nz-input-group>
-    <ng-template #inputClearTpl>
-      <span
-        nz-icon
-        class="ant-input-clear-icon"
-        nzTheme="fill"
-        nzType="close-circle"
-        *ngIf="inputValue"
-        (click)="inputValue = null"
-      ></span>
-    </ng-template>
-    <br />
-    <br />
-    <nz-input-group
-      [nzSuffix]="textAreaClearTpl"
-      class="ant-input-affix-wrapper-textarea-with-clear-btn"
-    >
-      <textarea
-        nz-input
-        [(ngModel)]="textValue"
-        placeholder="textarea with clear icon"
-      ></textarea>
-    </nz-input-group>
-    <ng-template #textAreaClearTpl>
-      <span
-        nz-icon
-        class="ant-input-clear-icon"
-        nzTheme="fill"
-        nzType="close-circle"
-        *ngIf="textValue"
-        (click)="textValue = null"
-      ></span>
-    </ng-template>
+  <nz-content class="content">
+    <div class="input-tasks">
+      <h1>Crie uma tarefa</h1>
+      <div class="container-input-text">
+        <input nz-input placeholder="Título" type="text" />
+        <input nz-input placeholder="Descrição" type="text" />
+        <input nz-input placeholder="Prioridade" />
+        <div class="container-inputs-date">
+          <input
+            nz-input
+            placeholder="Start date"
+            type="date"
+            class="input-date"
+          />
+
+          <input nz-input placeholder="Final date" type="date" />
+        </div>
+
+        <button
+          nz-button
+          class="login-form-button login-form-margin button-task"
+          [nzType]="'primary'"
+        >
+          Cadastrar
+        </button>
+      </div>
+    </div>
   </nz-content>
 
   <nz-footer class="footer"
