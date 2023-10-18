@@ -9,6 +9,7 @@ import {
 import { RegisterService } from './register.service';
 import { IUser } from 'src/app/interfaces/user.interface';
 import { UserService } from './../../shared/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,8 @@ export class RegisterComponent {
   constructor(
     private fb: NonNullableFormBuilder,
     private registerService: RegisterService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   public submitForm(): void {
@@ -46,6 +48,7 @@ export class RegisterComponent {
         this.userService.setUser(success);
         const savedUser: IUser = this.userService.getUser();
         console.log(savedUser);
+        this.router.navigate(['/home']);
       });
     } else {
       Object.values(this.userForm.controls).forEach((control) => {

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginRoutingModule } from './register.routing.module';
+import { RegisterRoutingModule } from './register-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { RegisterComponent } from './register.component';
@@ -11,7 +11,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   declarations: [RegisterComponent],
   imports: [
     CommonModule,
-    LoginRoutingModule,
+    RegisterRoutingModule,
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
