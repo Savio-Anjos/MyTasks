@@ -11,9 +11,12 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { ComponentsModule } from 'src/app/components/components.module';
+import { HeaderComponent } from 'src/app/components/header/header.component';
+import { FooterComponent } from 'src/app/components/footer/footer.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, HeaderComponent, FooterComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
