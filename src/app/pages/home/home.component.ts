@@ -50,6 +50,13 @@ export class HomeComponent {
         finalDate: finalDateTrated,
       };
       console.log(dataTask);
+    } else {
+      Object.values(this.taskForm.controls).forEach((control) => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
     }
   }
 }

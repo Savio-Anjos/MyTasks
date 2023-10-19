@@ -5,20 +5,41 @@
     <div class="input-tasks">
       <h1>Crie uma tarefa</h1>
       <div class="container-input-text">
-        <form [formGroup]="taskForm" (ngSubmit)="submitForm()">
-          <input
-            nz-input
-            placeholder="Título"
-            type="text"
-            formControlName="title"
-          />
-          <input
-            nz-input
-            placeholder="Descrição"
-            type="text"
-            formControlName="description"
-          />
-          <input nz-input placeholder="Prioridade" formControlName="priority" />
+        <form [formGroup]="taskForm" (ngSubmit)="submitForm()" nz-form>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Por favor digite um título!">
+              <input
+                nz-input
+                placeholder="Título"
+                type="text"
+                formControlName="title"
+              />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Por favor digite uma descrição!">
+              <input
+                nz-input
+                placeholder="Descrição"
+                type="text"
+                formControlName="description"
+              />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control
+              nzErrorTip="Por favor digite o nível de prioridade!"
+            >
+              <input
+                nz-input
+                placeholder="Prioridade"
+                formControlName="priority"
+              />
+            </nz-form-control>
+          </nz-form-item>
+
           <div class="container-label">
             <label for="startDate">Data inicial</label>
             <label for="startTime">Hora inicial</label>
@@ -26,42 +47,52 @@
             <label for="finalTime">Hora final</label>
           </div>
           <div class="container-inputs-date">
-            <div>
-              <input
-                nz-input
-                id="startDate"
-                type="date"
-                class="input-date"
-                formControlName="startDate"
-              />
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Selecione uma data!">
+                <input
+                  nz-input
+                  id="startDate"
+                  type="date"
+                  class="input-date"
+                  formControlName="startDate"
+                />
+              </nz-form-control>
+            </nz-form-item>
 
-              <input
-                nz-input
-                id="startTime"
-                type="time"
-                class="input-date"
-                formControlName="startTime"
-              />
-            </div>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Selecione um horário!">
+                <input
+                  nz-input
+                  id="startTime"
+                  type="time"
+                  class="input-date"
+                  formControlName="startTime"
+                />
+              </nz-form-control>
+            </nz-form-item>
 
-            <div>
-              <input
-                nz-input
-                id="finalDate"
-                placeholder="Final date"
-                type="date"
-                formControlName="finalDate"
-                class="input-date"
-              />
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Selecione uma data!">
+                <input
+                  nz-input
+                  id="finalDate"
+                  type="date"
+                  formControlName="finalDate"
+                  class="input-date"
+                />
+              </nz-form-control>
+            </nz-form-item>
 
-              <input
-                nz-input
-                id="finalTime"
-                placeholder="Final date"
-                type="time"
-                formControlName="finalTime"
-              />
-            </div>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Selecione um horário!">
+                <input
+                  nz-input
+                  id="finalTime"
+                  type="time"
+                  formControlName="finalTime"
+                />
+              </nz-form-control>
+            </nz-form-item>
           </div>
 
           <button
