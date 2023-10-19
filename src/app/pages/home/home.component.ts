@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import {
   FormControl,
+  FormGroup,
   FormRecord,
   NonNullableFormBuilder,
+  Validators,
 } from '@angular/forms';
 
 @Component({
@@ -11,27 +13,34 @@ import {
   styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent {
-  public validateForm: FormRecord<FormControl<string>> = this.fb.record({});
-  public controlArray: Array<{ index: number; show: boolean }> = [];
-  public isCollapse: boolean = true;
+  public taskForm: FormGroup<{
+    title: FormControl<string>;
+    description: FormControl<string>;
+    priority: FormControl<string>;
+    startDate: FormControl<string>;
+    finalDate: FormControl<string>;
+    startTime: FormControl<string>;
+    finalTime: FormControl<string>;
+  }> = this.fb.group({
+    title: ['', [Validators.required]],
+    description: ['', [Validators.required]],
+    priority: ['', [Validators.required]],
+    startDate: ['', [Validators.required]],
+    finalDate: ['', [Validators.required]],
+    startTime: ['', [Validators.required]],
+    finalTime: ['', [Validators.required]],
+  });
 
   constructor(private fb: NonNullableFormBuilder) {}
 
-  public ngOnInit(): void {
-    for (let i = 0; i < 10; i++) {
-      this.controlArray.push({ index: i, show: i < 6 });
-      this.validateForm.addControl(`field${i}`, this.fb.control(''));
+  public ngOnInit(): void {}
+
+  public submitForm(): void {
+    if (this.taskForm.valid) {
+      const startDateTrated: string = `${this.taskForm.value.startDate}T${this.taskForm.value.startTime}`;
+
+      console.log(this.taskForm.value);
+      console.log(startDateTrated);
     }
-  }
-
-  public toggleCollapse(): void {
-    this.isCollapse = !this.isCollapse;
-    this.controlArray.forEach((c, index) => {
-      c.show = this.isCollapse ? index < 6 : true;
-    });
-  }
-
-  public resetForm(): void {
-    this.validateForm.reset();
   }
 }

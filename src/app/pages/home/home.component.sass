@@ -1,3 +1,11 @@
+nz-layout
+  display: flex
+  flex-direction: column
+  height: 100vh
+
+  nz-content
+    flex: 1
+    overflow-y: auto
 
 .content
   background-color: #f3f4f6
@@ -6,13 +14,14 @@
   display: flex
   flex-direction: column
   align-items: center
+  margin-top: 1.5rem
   border: 1px solid red
 
   input
     margin-bottom: 1rem
 
 .container-input-text
-  border: 0.3rem solid rgba(6,95,70,1)
+  border: 0.3rem solid #10b981
   border-radius: 0.5rem
   padding: 5rem
 
@@ -21,12 +30,21 @@
   justify-content: space-around
 
   input
-    width: 20rem
+    width: 11rem
 
 .input-date
   margin-right: 3rem
 
+.container-label
+  margin-bottom: 0.4rem
+
+  label
+    font-weight: 500
+
+  label + label
+    margin-left: 9.8rem
+
 .button-task
   width: 20rem
-  margin-left: 10rem
+  margin-left: 16.5rem
   margin-top: 2rem

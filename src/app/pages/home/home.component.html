@@ -5,27 +5,73 @@
     <div class="input-tasks">
       <h1>Crie uma tarefa</h1>
       <div class="container-input-text">
-        <input nz-input placeholder="Título" type="text" />
-        <input nz-input placeholder="Descrição" type="text" />
-        <input nz-input placeholder="Prioridade" />
-        <div class="container-inputs-date">
+        <form [formGroup]="taskForm" (ngSubmit)="submitForm()">
           <input
             nz-input
-            placeholder="Start date"
-            type="date"
-            class="input-date"
+            placeholder="Título"
+            type="text"
+            formControlName="title"
           />
+          <input
+            nz-input
+            placeholder="Descrição"
+            type="text"
+            formControlName="description"
+          />
+          <input nz-input placeholder="Prioridade" formControlName="priority" />
+          <div class="container-label">
+            <label for="startDate">Data inicial</label>
+            <label for="startTime">Hora inicial</label>
+            <label for="finalDate">Data final</label>
+            <label for="finalTime">Hora final</label>
+          </div>
+          <div class="container-inputs-date">
+            <div>
+              <input
+                nz-input
+                id="startDate"
+                type="date"
+                class="input-date"
+                formControlName="startDate"
+              />
 
-          <input nz-input placeholder="Final date" type="date" />
-        </div>
+              <input
+                nz-input
+                id="startTime"
+                type="time"
+                class="input-date"
+                formControlName="startTime"
+              />
+            </div>
 
-        <button
-          nz-button
-          class="login-form-button login-form-margin button-task"
-          [nzType]="'primary'"
-        >
-          Cadastrar
-        </button>
+            <div>
+              <input
+                nz-input
+                id="finalDate"
+                placeholder="Final date"
+                type="date"
+                formControlName="finalDate"
+                class="input-date"
+              />
+
+              <input
+                nz-input
+                id="finalTime"
+                placeholder="Final date"
+                type="time"
+                formControlName="finalTime"
+              />
+            </div>
+          </div>
+
+          <button
+            nz-button
+            class="login-form-button login-form-margin button-task"
+            [nzType]="'primary'"
+          >
+            Cadastrar
+          </button>
+        </form>
       </div>
     </div>
   </nz-content>

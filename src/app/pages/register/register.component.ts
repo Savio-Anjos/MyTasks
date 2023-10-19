@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.sass'],
 })
 export class RegisterComponent {
-  userForm: FormGroup<{
+  public userForm: FormGroup<{
     name: FormControl<string>;
     username: FormControl<string>;
     password: FormControl<string>;
