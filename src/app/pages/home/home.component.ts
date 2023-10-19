@@ -6,6 +6,7 @@ import {
   NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
+import { ITask } from 'src/app/interfaces/task.interface';
 
 @Component({
   selector: 'app-home',
@@ -37,10 +38,18 @@ export class HomeComponent {
 
   public submitForm(): void {
     if (this.taskForm.valid) {
-      const startDateTrated: string = `${this.taskForm.value.startDate}T${this.taskForm.value.startTime}`;
+      const taskForm = this.taskForm.value;
+      const startDateTrated: string = `${taskForm.startDate}T${taskForm.startTime}`;
+      const finalDateTrated: string = `${taskForm.finalDate}T${taskForm.finalTime}`;
 
-      console.log(this.taskForm.value);
-      console.log(startDateTrated);
+      const dataTask: ITask = {
+        title: taskForm.title,
+        description: taskForm.description,
+        priority: taskForm.priority,
+        startDate: startDateTrated,
+        finalDate: finalDateTrated,
+      };
+      console.log(dataTask);
     }
   }
 }
