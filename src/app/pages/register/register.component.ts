@@ -43,9 +43,9 @@ export class RegisterComponent {
         username: this.userForm.value.username,
         password: this.userForm.value.password,
       };
+      this.userService.setUser(user);
 
-      this.registerService.createUser(user).subscribe((success: IUser) => {
-        this.userService.setUser(success);
+      this.registerService.createUser(user).subscribe((user: IUser) => {
         const savedUser: IUser = this.userService.getUser();
         console.log(savedUser);
         this.router.navigate(['/home']);

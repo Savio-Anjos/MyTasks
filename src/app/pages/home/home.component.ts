@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ITask } from 'src/app/interfaces/task.interface';
+import { HomeService } from './home.service';
 
 @Component({
   selector: 'app-home',
@@ -18,38 +19,45 @@ export class HomeComponent {
     title: FormControl<string>;
     description: FormControl<string>;
     priority: FormControl<string>;
-    startDate: FormControl<string>;
-    finalDate: FormControl<string>;
+    startAt: FormControl<string>;
+    endAt: FormControl<string>;
     startTime: FormControl<string>;
     finalTime: FormControl<string>;
   }> = this.fb.group({
     title: ['', [Validators.required]],
     description: ['', [Validators.required]],
     priority: ['', [Validators.required]],
-    startDate: ['', [Validators.required]],
-    finalDate: ['', [Validators.required]],
+    startAt: ['', [Validators.required]],
+    endAt: ['', [Validators.required]],
     startTime: ['', [Validators.required]],
     finalTime: ['', [Validators.required]],
   });
 
-  constructor(private fb: NonNullableFormBuilder) {}
+  constructor(
+    private fb: NonNullableFormBuilder,
+    private homeService: HomeService
+  ) {}
 
   public ngOnInit(): void {}
 
   public submitForm(): void {
     if (this.taskForm.valid) {
       const taskForm = this.taskForm.value;
-      const startDateTrated: string = `${taskForm.startDate}T${taskForm.startTime}`;
-      const finalDateTrated: string = `${taskForm.finalDate}T${taskForm.finalTime}`;
+      const startAtTrated: string = `${taskForm.startAt}T${taskForm.startTime}`;
+      const endAtTrated: string = `${taskForm.endAt}T${taskForm.finalTime}`;
 
-      const dataTask: ITask = {
+      const task: ITask = {
         title: taskForm.title,
         description: taskForm.description,
         priority: taskForm.priority,
-        startDate: startDateTrated,
-        finalDate: finalDateTrated,
+        startAt: startAtTrated,
+        endAt: endAtTrated,
       };
-      console.log(dataTask);
+      console.log(task);
+
+      this.homeService.createTask(task).subscribe((task: ITask) => {
+        console.log(task);
+      });
     } else {
       Object.values(this.taskForm.controls).forEach((control) => {
         if (control.invalid) {

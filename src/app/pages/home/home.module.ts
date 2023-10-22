@@ -14,12 +14,14 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, FooterComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    HttpClientModule,
     NzFormModule,
     NzButtonModule,
     HomeRoutingModule,
