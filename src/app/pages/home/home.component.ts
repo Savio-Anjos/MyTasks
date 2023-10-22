@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { ITask } from 'src/app/interfaces/task.interface';
 import { HomeService } from './home.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -35,7 +36,8 @@ export class HomeComponent {
 
   constructor(
     private fb: NonNullableFormBuilder,
-    private homeService: HomeService
+    private homeService: HomeService,
+    private toastr: ToastrService
   ) {}
 
   public ngOnInit(): void {}
@@ -55,9 +57,24 @@ export class HomeComponent {
       };
       console.log(task);
 
-      this.homeService.createTask(task).subscribe((task: ITask) => {
-        console.log(task);
-      });
+      this.homeService.createTask(task).subscribe(
+        (task: ITask) => {
+          console.log(task);
+          this.toastr.success('Tarefa criada com sucesso!');
+          this.taskForm.reset();
+        },
+        (error) => {
+          if (error.status === 400) {
+            console.error('Erro ao criar tarefa:', error);
+            this.toastr.warning(error.error);
+          } else {
+            console.error('Erro ao criar tarefa:', error);
+            this.toastr.error(
+              'Ocorreu um erro ao criar a tarefa. Por favor, tente novamente.'
+            );
+          }
+        }
+      );
     } else {
       Object.values(this.taskForm.controls).forEach((control) => {
         if (control.invalid) {

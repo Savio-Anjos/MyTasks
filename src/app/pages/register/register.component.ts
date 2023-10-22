@@ -10,6 +10,7 @@ import { RegisterService } from './register.service';
 import { IUser } from 'src/app/interfaces/user.interface';
 import { UserService } from './../../shared/user.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,8 @@ export class RegisterComponent {
     private fb: NonNullableFormBuilder,
     private registerService: RegisterService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   public submitForm(): void {
@@ -45,11 +47,25 @@ export class RegisterComponent {
       };
       this.userService.setUser(user);
 
-      this.registerService.createUser(user).subscribe((user: IUser) => {
-        const savedUser: IUser = this.userService.getUser();
-        console.log(savedUser);
-        this.router.navigate(['/home']);
-      });
+      this.registerService.createUser(user).subscribe(
+        (user: IUser) => {
+          const savedUser: IUser = this.userService.getUser();
+          console.log(savedUser);
+          this.toastr.success('Usuário criado com sucesso!');
+          this.router.navigate(['/home']);
+        },
+        (error) => {
+          if (error.status === 400) {
+            console.error('Erro ao criar usuário:', error);
+            this.toastr.warning('Nome de usuário já existe!');
+          } else {
+            console.error('Erro ao criar usuário:', error);
+            this.toastr.error(
+              'Ocorreu um erro ao criar o usuário. Por favor, tente novamente.'
+            );
+          }
+        }
+      );
     } else {
       Object.values(this.userForm.controls).forEach((control) => {
         if (control.invalid) {
