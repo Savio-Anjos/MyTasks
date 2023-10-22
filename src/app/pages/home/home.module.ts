@@ -15,6 +15,9 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, FooterComponent],
@@ -29,6 +32,9 @@ import { HttpClientModule } from '@angular/common/http';
     NzBreadCrumbModule,
     NzInputModule,
     NzIconModule,
+    NzTableModule,
+    NzDividerModule,
   ],
+  providers: [DatePipe],
 })
 export class HomeModule {}

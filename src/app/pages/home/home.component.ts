@@ -9,6 +9,7 @@ import {
 import { ITask } from 'src/app/interfaces/task.interface';
 import { HomeService } from './home.service';
 import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -34,13 +35,18 @@ export class HomeComponent {
     finalTime: ['', [Validators.required]],
   });
 
+  public tasks: ITask[] = [];
+
   constructor(
     private fb: NonNullableFormBuilder,
     private homeService: HomeService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private datePipe: DatePipe
   ) {}
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void {
+    this.listTasks();
+  }
 
   public submitForm(): void {
     if (this.taskForm.valid) {
@@ -62,6 +68,7 @@ export class HomeComponent {
           console.log(task);
           this.toastr.success('Tarefa criada com sucesso!');
           this.taskForm.reset();
+          this.listTasks();
         },
         (error) => {
           if (error.status === 400) {
@@ -83,5 +90,46 @@ export class HomeComponent {
         }
       });
     }
+  }
+
+  public formatDateAndTime(dateTime: string): {
+    date: string | null;
+    time: string | null;
+  } {
+    const date: string | null = this.datePipe.transform(dateTime, 'dd/MM/yyyy');
+    const time: string | null = this.datePipe.transform(dateTime, 'HH:mm');
+    return { date, time };
+  }
+
+  public formatTaskList(tasks: ITask[]): void {
+    this.tasks = tasks.map((task) => {
+      const { date: startAtDate, time: startAtTime } = this.formatDateAndTime(
+        task.startAt
+      );
+      const { date: endAtDate, time: endAtTime } = this.formatDateAndTime(
+        task.endAt
+      );
+
+      const formattedTask: ITask = {
+        ...task,
+        startAtDate,
+        startAtTime,
+        endAtDate,
+        endAtTime,
+      };
+
+      return formattedTask;
+    });
+  }
+
+  public listTasks(): ITask[] {
+    this.homeService.getTasks().subscribe((tasks: ITask[]) => {
+      this.formatTaskList(tasks);
+      this.tasks = tasks;
+
+      console.log(this.tasks);
+    });
+
+    return this.tasks;
   }
 }

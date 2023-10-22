@@ -4,7 +4,7 @@
   <nz-content class="content">
     <div class="input-tasks">
       <h1>Crie uma tarefa</h1>
-      <div class="container-input-text">
+      <section class="container">
         <form [formGroup]="taskForm" (ngSubmit)="submitForm()" nz-form>
           <nz-form-item>
             <nz-form-control nzErrorTip="Por favor digite um título!">
@@ -103,6 +103,36 @@
             Cadastrar
           </button>
         </form>
+      </section>
+
+      <div class="container-list">
+        <h1>Lista de Tarefas</h1>
+        <section class="task-list">
+          <nz-table #basicTable [nzData]="tasks">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Prioridade</th>
+                <th>Data Inicial</th>
+                <th>Data Final</th>
+                <th>Hora Inicial</th>
+                <th>Hora Final</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of tasks">
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.priority }}</td>
+                <td>{{ formatDateAndTime(task.startAt).date }}</td>
+                <td>{{ formatDateAndTime(task.endAt).date }}</td>
+                <td>{{ formatDateAndTime(task.startAt).time }}</td>
+                <td>{{ formatDateAndTime(task.endAt).time }}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </section>
       </div>
     </div>
   </nz-content>
