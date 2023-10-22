@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
 
 registerLocaleData(en);
 
@@ -24,7 +25,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
