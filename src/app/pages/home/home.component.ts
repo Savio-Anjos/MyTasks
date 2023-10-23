@@ -53,8 +53,8 @@ export class HomeComponent {
     if (this.taskForm.valid) {
       if (this.isCreating) {
         const taskForm = this.taskForm.value;
-        const startAtTrated: string = `${taskForm.startAt}T${taskForm.startTime}`;
-        const endAtTrated: string = `${taskForm.endAt}T${taskForm.finalTime}`;
+        const startAtTrated: string = `${taskForm.startAt}T${taskForm.startAtTime}`;
+        const endAtTrated: string = `${taskForm.endAt}T${taskForm.endAtTime}`;
 
         const task: ITask = {
           id: '',
