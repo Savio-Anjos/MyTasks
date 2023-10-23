@@ -1,11 +1,14 @@
+
 nz-layout
   display: flex
   flex-direction: column
   height: 100vh
 
-  nz-content
-    flex: 1
-    overflow-y: auto
+nz-content
+  flex: 1
+  overflow-y: auto
+  scrollbar-width: thin
+  scrollbar-color: #ccc #666
 
 .content
   background-color: #f3f4f6
@@ -15,6 +18,19 @@ nz-layout
   flex-direction: column
   align-items: center
   margin-top: 1.5rem
+
+  .custom-scrollbar
+    width: 8px
+    height: 6px
+    background-color: #10b981
+    border-radius: 4px
+
+  &-thumb
+    background-color: #10b981
+    border-radius: 4px
+
+.custom-scrollbar-thumb:hover
+  background-color: #10b981
 
   nz-form-item
   margin-bottom: 1rem
