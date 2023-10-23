@@ -53,44 +53,7 @@ export class HomeComponent {
   public submitForm(): void {
     if (this.taskForm.valid) {
       if (this.isCreating) {
-        const taskForm = this.taskForm.value;
-        const startAtTrated: string = `${taskForm.startAt}T${taskForm.startAtTime}`;
-        const endAtTrated: string = `${taskForm.endAt}T${taskForm.endAtTime}`;
-
-        const task: ITask = {
-          id: '',
-          title: taskForm.title,
-          description: taskForm.description,
-          priority: taskForm.priority,
-          startAt: startAtTrated,
-          endAt: endAtTrated,
-        };
-        console.log(task);
-
-        this.homeService.createTask(task).subscribe(
-          (task: ITask) => {
-            console.log(task);
-            this.toastr.success('Tarefa criada com sucesso!');
-            this.taskForm.reset();
-            this.listTasks();
-            const formElement =
-              this.el.nativeElement.querySelector('#container-list');
-            if (formElement) {
-              formElement.scrollIntoView({ behavior: 'smooth' });
-            }
-          },
-          (error) => {
-            if (error.status === 400) {
-              console.error('Erro ao criar tarefa:', error);
-              this.toastr.warning(error.error);
-            } else {
-              console.error('Erro ao criar tarefa:', error);
-              this.toastr.error(
-                'Ocorreu um erro ao criar a tarefa. Por favor, tente novamente.'
-              );
-            }
-          }
-        );
+        this.createTasks();
       } else {
         this.updateTask();
       }
@@ -132,6 +95,47 @@ export class HomeComponent {
 
       return formattedTask;
     });
+  }
+
+  public createTasks(): void {
+    const taskForm = this.taskForm.value;
+    const startAtTrated: string = `${taskForm.startAt}T${taskForm.startAtTime}`;
+    const endAtTrated: string = `${taskForm.endAt}T${taskForm.endAtTime}`;
+
+    const task: ITask = {
+      id: '',
+      title: taskForm.title,
+      description: taskForm.description,
+      priority: taskForm.priority,
+      startAt: startAtTrated,
+      endAt: endAtTrated,
+    };
+    console.log(task);
+
+    this.homeService.createTask(task).subscribe(
+      (task: ITask) => {
+        console.log(task);
+        this.toastr.success('Tarefa criada com sucesso!');
+        this.taskForm.reset();
+        this.listTasks();
+        const formElement =
+          this.el.nativeElement.querySelector('#container-list');
+        if (formElement) {
+          formElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      },
+      (error) => {
+        if (error.status === 400) {
+          console.error('Erro ao criar tarefa:', error);
+          this.toastr.warning(error.error);
+        } else {
+          console.error('Erro ao criar tarefa:', error);
+          this.toastr.error(
+            'Ocorreu um erro ao criar a tarefa. Por favor, tente novamente.'
+          );
+        }
+      }
+    );
   }
 
   public listTasks(): ITask[] {
