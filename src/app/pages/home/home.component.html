@@ -118,6 +118,8 @@
                 <th>Data Final</th>
                 <th>Hora Inicial</th>
                 <th>Hora Final</th>
+                <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -129,6 +131,23 @@
                 <td>{{ formatDateAndTime(task.endAt).date }}</td>
                 <td>{{ formatDateAndTime(task.startAt).time }}</td>
                 <td>{{ formatDateAndTime(task.endAt).time }}</td>
+                <td>
+                  <span
+                    class="icon-edit"
+                    nz-icon
+                    nzType="edit"
+                    nzTheme="outline"
+                  ></span>
+                </td>
+                <td>
+                  <span
+                    class="icon-delete"
+                    nz-icon
+                    nzType="delete"
+                    nzTheme="outline"
+                    (click)="deleteTask(task.id)"
+                  ></span>
+                </td>
               </tr>
             </tbody>
           </nz-table>

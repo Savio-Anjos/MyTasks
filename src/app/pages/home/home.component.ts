@@ -55,6 +55,7 @@ export class HomeComponent {
       const endAtTrated: string = `${taskForm.endAt}T${taskForm.finalTime}`;
 
       const task: ITask = {
+        id: '',
         title: taskForm.title,
         description: taskForm.description,
         priority: taskForm.priority,
@@ -131,5 +132,25 @@ export class HomeComponent {
     });
 
     return this.tasks;
+  }
+
+  public deleteTask(id: string): void {
+    this.homeService.deleteTask(id).subscribe(
+      () => {
+        this.toastr.success('Tarefa deletada com sucesso!');
+        this.listTasks();
+      },
+      (error) => {
+        if (error.status === 400) {
+          console.error('Erro ao deletar tarefa:', error);
+          this.toastr.warning(error.error);
+        } else {
+          console.error('Erro ao deletar tarefa:', error);
+          this.toastr.error(
+            'Ocorreu um erro ao deletar a tarefa. Por favor, tente novamente.'
+          );
+        }
+      }
+    );
   }
 }
