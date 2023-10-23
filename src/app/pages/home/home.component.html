@@ -66,7 +66,7 @@
                   id="startTime"
                   type="time"
                   class="input-date"
-                  formControlName="startTime"
+                  formControlName="startAtTime"
                 />
               </nz-form-control>
             </nz-form-item>
@@ -89,7 +89,7 @@
                   nz-input
                   id="finalTime"
                   type="time"
-                  formControlName="finalTime"
+                  formControlName="endAtTime"
                 />
               </nz-form-control>
             </nz-form-item>
@@ -100,7 +100,7 @@
             class="login-form-button login-form-margin button-task"
             [nzType]="'primary'"
           >
-            Cadastrar
+            {{ titleButton }}
           </button>
         </form>
       </section>
@@ -137,6 +137,7 @@
                     nz-icon
                     nzType="edit"
                     nzTheme="outline"
+                    (click)="fillOutForm(task.id, task)"
                   ></span>
                 </td>
                 <td>

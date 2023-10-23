@@ -39,6 +39,12 @@ export class HomeService {
   public deleteTask(id: string): Observable<Object> {
     const headers: HttpHeaders = this.getAuthorization();
 
-    return this.http.delete(`${this.API}${id}`, { headers }).pipe(take(1));
+    return this.http.delete(this.API + id, { headers }).pipe(take(1));
+  }
+
+  public updateTask(id: string, task: ITask): Observable<ITask> {
+    const headers: HttpHeaders = this.getAuthorization();
+
+    return this.http.put<ITask>(this.API + id, task, { headers }).pipe(take(1));
   }
 }

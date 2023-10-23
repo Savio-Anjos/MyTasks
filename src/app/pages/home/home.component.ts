@@ -17,25 +17,12 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent {
-  public taskForm: FormGroup<{
-    title: FormControl<string>;
-    description: FormControl<string>;
-    priority: FormControl<string>;
-    startAt: FormControl<string>;
-    endAt: FormControl<string>;
-    startTime: FormControl<string>;
-    finalTime: FormControl<string>;
-  }> = this.fb.group({
-    title: ['', [Validators.required]],
-    description: ['', [Validators.required]],
-    priority: ['', [Validators.required]],
-    startAt: ['', [Validators.required]],
-    endAt: ['', [Validators.required]],
-    startTime: ['', [Validators.required]],
-    finalTime: ['', [Validators.required]],
-  });
+  public taskForm: FormGroup = {} as FormGroup;
 
   public tasks: ITask[] = [];
+  public isCreating: boolean = true;
+  public titleButton: string = '';
+  private id: string = '';
 
   constructor(
     private fb: NonNullableFormBuilder,
@@ -45,44 +32,62 @@ export class HomeComponent {
   ) {}
 
   public ngOnInit(): void {
+    this.initializeVariables();
     this.listTasks();
+  }
+
+  private initializeVariables(): void {
+    this.taskForm = this.fb.group({
+      title: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      priority: ['', [Validators.required]],
+      startAt: ['', [Validators.required]],
+      endAt: ['', [Validators.required]],
+      startAtTime: ['', [Validators.required]],
+      endAtTime: ['', [Validators.required]],
+    });
+    this.titleButton = 'Cadastrar';
   }
 
   public submitForm(): void {
     if (this.taskForm.valid) {
-      const taskForm = this.taskForm.value;
-      const startAtTrated: string = `${taskForm.startAt}T${taskForm.startTime}`;
-      const endAtTrated: string = `${taskForm.endAt}T${taskForm.finalTime}`;
+      if (this.isCreating) {
+        const taskForm = this.taskForm.value;
+        const startAtTrated: string = `${taskForm.startAt}T${taskForm.startTime}`;
+        const endAtTrated: string = `${taskForm.endAt}T${taskForm.finalTime}`;
 
-      const task: ITask = {
-        id: '',
-        title: taskForm.title,
-        description: taskForm.description,
-        priority: taskForm.priority,
-        startAt: startAtTrated,
-        endAt: endAtTrated,
-      };
-      console.log(task);
+        const task: ITask = {
+          id: '',
+          title: taskForm.title,
+          description: taskForm.description,
+          priority: taskForm.priority,
+          startAt: startAtTrated,
+          endAt: endAtTrated,
+        };
+        console.log(task);
 
-      this.homeService.createTask(task).subscribe(
-        (task: ITask) => {
-          console.log(task);
-          this.toastr.success('Tarefa criada com sucesso!');
-          this.taskForm.reset();
-          this.listTasks();
-        },
-        (error) => {
-          if (error.status === 400) {
-            console.error('Erro ao criar tarefa:', error);
-            this.toastr.warning(error.error);
-          } else {
-            console.error('Erro ao criar tarefa:', error);
-            this.toastr.error(
-              'Ocorreu um erro ao criar a tarefa. Por favor, tente novamente.'
-            );
+        this.homeService.createTask(task).subscribe(
+          (task: ITask) => {
+            console.log(task);
+            this.toastr.success('Tarefa criada com sucesso!');
+            this.taskForm.reset();
+            this.listTasks();
+          },
+          (error) => {
+            if (error.status === 400) {
+              console.error('Erro ao criar tarefa:', error);
+              this.toastr.warning(error.error);
+            } else {
+              console.error('Erro ao criar tarefa:', error);
+              this.toastr.error(
+                'Ocorreu um erro ao criar a tarefa. Por favor, tente novamente.'
+              );
+            }
           }
-        }
-      );
+        );
+      } else {
+        this.updateTask();
+      }
     } else {
       Object.values(this.taskForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -148,6 +153,73 @@ export class HomeComponent {
           console.error('Erro ao deletar tarefa:', error);
           this.toastr.error(
             'Ocorreu um erro ao deletar a tarefa. Por favor, tente novamente.'
+          );
+        }
+      }
+    );
+  }
+
+  public fillOutForm(id: string, task: ITask): void {
+    this.isCreating = false;
+    this.id = id;
+    this.titleButton = 'Atualizar';
+
+    const startAt = this.formatDateAndTime(task.startAt);
+    const endAt = this.formatDateAndTime(task.endAt);
+    const startDate: string | null = this.datePipe.transform(
+      task.startAt,
+      'yyyy-MM-dd'
+    );
+    const endDate: string | null = this.datePipe.transform(
+      task.endAt,
+      'yyyy-MM-dd'
+    );
+
+    this.taskForm.patchValue({
+      title: task.title,
+      description: task.description,
+      priority: task.priority,
+      startAt: startDate,
+      endAt: endDate,
+      startAtTime: startAt.time,
+      endAtTime: endAt.time,
+    });
+  }
+
+  public updateTask(): void {
+    const taskForm: ITask = this.taskForm.value;
+
+    const startDateFormated = `${taskForm.startAt}T${taskForm.startAtTime}`;
+    const endDateFormated = `${taskForm.endAt}T${taskForm.endAtTime}`;
+
+    const dataTask: ITask = {
+      id: this.id,
+      title: taskForm.title,
+      description: taskForm.description,
+      priority: taskForm.priority,
+      startAt: startDateFormated,
+      endAt: endDateFormated,
+    };
+
+    console.log(dataTask);
+
+    this.homeService.updateTask(this.id, dataTask).subscribe(
+      (task) => {
+        console.log(task);
+        this.toastr.success('Tarefa Atualizada com sucesso!');
+        this.taskForm.reset();
+        this.listTasks();
+        this.isCreating = true;
+        this.titleButton = 'Cadastrar';
+      },
+      (error) => {
+        if (error.status === 400) {
+          console.error('Erro ao atualizar tarefa:', error);
+          this.toastr.warning(error.error);
+        } else {
+          console.error('Erro ao atualizar tarefa:', error);
+          this.toastr.error(
+            'Ocorreu um erro ao atualizar a tarefa. Por favor, tente novamente.'
           );
         }
       }
