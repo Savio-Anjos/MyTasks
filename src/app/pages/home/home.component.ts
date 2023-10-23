@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -28,7 +28,8 @@ export class HomeComponent {
     private fb: NonNullableFormBuilder,
     private homeService: HomeService,
     private toastr: ToastrService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private el: ElementRef
   ) {}
 
   public ngOnInit(): void {
@@ -72,6 +73,11 @@ export class HomeComponent {
             this.toastr.success('Tarefa criada com sucesso!');
             this.taskForm.reset();
             this.listTasks();
+            const formElement =
+              this.el.nativeElement.querySelector('#container-list');
+            if (formElement) {
+              formElement.scrollIntoView({ behavior: 'smooth' });
+            }
           },
           (error) => {
             if (error.status === 400) {
@@ -184,6 +190,11 @@ export class HomeComponent {
       startAtTime: startAt.time,
       endAtTime: endAt.time,
     });
+
+    const formElement = this.el.nativeElement.querySelector('#input-tasks');
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   public updateTask(): void {
@@ -211,6 +222,11 @@ export class HomeComponent {
         this.listTasks();
         this.isCreating = true;
         this.titleButton = 'Cadastrar';
+        const formElement =
+          this.el.nativeElement.querySelector('#container-list');
+        if (formElement) {
+          formElement.scrollIntoView({ behavior: 'smooth' });
+        }
       },
       (error) => {
         if (error.status === 400) {

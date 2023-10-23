@@ -2,10 +2,15 @@
   <app-header></app-header>
 
   <nz-content class="content">
-    <div class="input-tasks">
+    <div class="input-tasks" id="input-tasks">
       <h1>Crie uma tarefa</h1>
       <section class="container">
-        <form [formGroup]="taskForm" (ngSubmit)="submitForm()" nz-form>
+        <form
+          [formGroup]="taskForm"
+          (ngSubmit)="submitForm()"
+          nz-form
+          id="taskForm"
+        >
           <nz-form-item>
             <nz-form-control nzErrorTip="Por favor digite um título!">
               <input
@@ -105,7 +110,7 @@
         </form>
       </section>
 
-      <div class="container-list">
+      <div class="container-list" id="container-list">
         <h1>Lista de Tarefas</h1>
         <section class="task-list">
           <nz-table #basicTable [nzData]="tasks">
