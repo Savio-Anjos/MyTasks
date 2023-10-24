@@ -6,7 +6,14 @@
 
   <nz-content class="content custom-scrollbar">
     <div class="input-tasks" id="input-tasks">
-      <h1>Crie uma tarefa</h1>
+      <div>
+        <article class="title-create">
+          <div class="word-waves">
+            <span>Crie uma tarefa</span>
+            <span>Crie uma tarefa</span>
+          </div>
+        </article>
+      </div>
       <section class="container">
         <form
           [formGroup]="taskForm"
@@ -114,7 +121,12 @@
       </section>
 
       <div class="container-list" id="container-list">
-        <h1>Lista de Tarefas</h1>
+        <article class="title-list">
+          <div class="word-waves">
+            <span>Lista de tarefas</span>
+            <span>Lista de tarefas</span>
+          </div>
+        </article>
         <section class="task-list">
           <nz-table
             #basicTable
