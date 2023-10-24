@@ -16,7 +16,8 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
+
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { DatePipe } from '@angular/common';
 
 @NgModule({
@@ -33,7 +34,7 @@ import { DatePipe } from '@angular/common';
     NzInputModule,
     NzIconModule,
     NzTableModule,
-    NzDividerModule,
+    NzPaginationModule,
   ],
   providers: [DatePipe],
 })

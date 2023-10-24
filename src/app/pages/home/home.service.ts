@@ -33,7 +33,7 @@ export class HomeService {
 
   public getTasks(): Observable<ITask[]> {
     const headers: HttpHeaders = this.getAuthorization();
-    return this.http.get<ITask[]>(this.API, { headers }).pipe(delay(2000));
+    return this.http.get<ITask[]>(this.API, { headers }).pipe(delay(1000));
   }
 
   public deleteTask(id: string): Observable<Object> {

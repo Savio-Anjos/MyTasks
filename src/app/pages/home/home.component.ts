@@ -23,6 +23,10 @@ export class HomeComponent {
   public isCreating: boolean = true;
   public titleButton: string = '';
   private id: string = '';
+  public pageIndex: number = 1;
+  public pageSize: number = 4;
+  public total: number = 0;
+  public allTasks: ITask[] = [];
 
   constructor(
     private fb: NonNullableFormBuilder,
@@ -142,6 +146,9 @@ export class HomeComponent {
     this.homeService.getTasks().subscribe((tasks: ITask[]) => {
       this.formatTaskList(tasks);
       this.tasks = tasks;
+      this.allTasks = tasks;
+      this.total = tasks.length;
+      this.loadData();
 
       console.log(this.tasks);
     });
@@ -244,5 +251,16 @@ export class HomeComponent {
         }
       }
     );
+  }
+
+  public loadData(): void {
+    const startIndex = (this.pageIndex - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.tasks = this.allTasks.slice(startIndex, endIndex);
+  }
+
+  public pageIndexChange(pageIndex: number): void {
+    this.pageIndex = pageIndex;
+    this.loadData();
   }
 }

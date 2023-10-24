@@ -113,7 +113,17 @@
       <div class="container-list" id="container-list">
         <h1>Lista de Tarefas</h1>
         <section class="task-list">
-          <nz-table #basicTable [nzData]="tasks">
+          <nz-table
+            #basicTable
+            [nzData]="allTasks"
+            [nzPageSize]="pageSize"
+            [nzPageIndex]="pageIndex"
+            [nzTotal]="total"
+            [nzPageIndex]="pageIndex"
+            [nzTotal]="total"
+            [nzPageSize]="pageSize"
+            (nzPageIndexChange)="pageIndexChange($event)"
+          >
             <thead>
               <tr>
                 <th>Título</th>
