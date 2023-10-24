@@ -54,6 +54,20 @@ export class HomeComponent {
     this.titleButton = 'Cadastrar';
   }
 
+  public navToCreateTask(): void {
+    const formElement = this.el.nativeElement.querySelector('#input-tasks');
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  public navToListTasks(): void {
+    const formElement = this.el.nativeElement.querySelector('#container-list');
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
   public submitForm(): void {
     if (this.taskForm.valid) {
       if (this.isCreating) {
@@ -122,11 +136,7 @@ export class HomeComponent {
         this.toastr.success('Tarefa criada com sucesso!');
         this.taskForm.reset();
         this.listTasks();
-        const formElement =
-          this.el.nativeElement.querySelector('#container-list');
-        if (formElement) {
-          formElement.scrollIntoView({ behavior: 'smooth' });
-        }
+        this.navToListTasks();
       },
       (error) => {
         if (error.status === 400) {
@@ -202,10 +212,7 @@ export class HomeComponent {
       endAtTime: endAt.time,
     });
 
-    const formElement = this.el.nativeElement.querySelector('#input-tasks');
-    if (formElement) {
-      formElement.scrollIntoView({ behavior: 'smooth' });
-    }
+    this.navToCreateTask();
   }
 
   public updateTask(): void {
@@ -233,11 +240,7 @@ export class HomeComponent {
         this.listTasks();
         this.isCreating = true;
         this.titleButton = 'Cadastrar';
-        const formElement =
-          this.el.nativeElement.querySelector('#container-list');
-        if (formElement) {
-          formElement.scrollIntoView({ behavior: 'smooth' });
-        }
+        this.navToListTasks();
       },
       (error) => {
         if (error.status === 400) {
