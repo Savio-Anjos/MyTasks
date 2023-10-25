@@ -1,6 +1,8 @@
+@import '../../styles/variables'
+
 .header
-  background: rgb(6,95,70)
-  background: radial-gradient(circle, rgba(6,95,70,1) 76%, rgba(52,211,153,1) 100%)
+  background: $emerald-700
+  background: $emerald-gradient
 
   .container-nav
     display: flex
@@ -9,7 +11,7 @@
   h1
     font-size: 2.5rem
     font-weight: bold
-    color: #f3f4f6
+    color: $gray-100
 
 .container-button-nav
   width: 20rem
@@ -25,12 +27,12 @@
     text-align: center
     height: 2.5rem
     background: transparent
-    border: 2px solid #f3f4f6
+    border: 2px solid $gray-100
     border-radius: 1rem
-    color: #f3f4f6
+    color: $gray-100
     cursor: pointer
     transition: 1s
 
   button:hover
-    background-color: #f3f4f6
-    color: #0f172a
+    background-color: $gray-100
+    color: $slate-900

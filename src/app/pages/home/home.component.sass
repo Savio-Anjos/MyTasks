@@ -1,4 +1,4 @@
-
+@import '../../styles/variables'
 nz-layout
   display: flex
   flex-direction: column
@@ -11,7 +11,7 @@ nz-content
   scrollbar-color: #ccc #666
 
 .content
-  background-color: #f3f4f6
+  background-color: $gray-100
 
   article
     position: relative
@@ -27,14 +27,14 @@ nz-content
 
   & span
     position: absolute
-    color: #fff
+    color: $gray-100
     font-weight: bold
     font-size: 2rem
     transform: translate(-50%, -50%)
 
   & span:nth-child(1)
     color: transparent
-    -webkit-text-stroke: 0.3px #10b981
+    -webkit-text-stroke: 0.3px $emerald-500
 
   & span:nth-child(2)
     color: rgba(6,95,70,1)
@@ -50,21 +50,21 @@ nz-content
   .custom-scrollbar
     width: 8px
     height: 6px
-    background-color: #10b981
+    background-color: $emerald-500
     border-radius: 4px
 
   &-thumb
-    background-color: #10b981
+    background-color: $emerald-500
     border-radius: 4px
 
 .custom-scrollbar-thumb:hover
-  background-color: #10b981
+  background-color: $emerald-500
 
   nz-form-item
   margin-bottom: 1rem
 
 .container
-  border: 0.3rem solid #10b981
+  border: 0.3rem solid $emerald-500
   border-radius: 0.5rem
   padding: 5rem
 
@@ -100,13 +100,13 @@ nz-content
   margin-top: 2rem
 
 .task-list
-  border: 0.3rem solid #10b981
+  border: 0.3rem solid $emerald-500
   border-radius: 0.5rem
   padding: 2rem
   width: 80rem
 
 .icon-edit
-  color: #38bdf8
+  color: $sky-400
   cursor: pointer
   transition: 0.6s
 
@@ -114,7 +114,7 @@ nz-content
   font-size: 1.4rem
 
 .icon-delete
-  color: #FF0000
+  color: $red-700
   cursor: pointer
   transition: 0.6s
 
