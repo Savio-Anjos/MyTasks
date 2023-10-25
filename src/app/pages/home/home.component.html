@@ -119,16 +119,19 @@
           </button>
         </form>
       </section>
-
-      <div class="container-list" id="container-list">
+      <div class="container-list-title">
         <article class="title-list">
           <div class="word-waves">
             <span>Lista de tarefas</span>
             <span>Lista de tarefas</span>
           </div>
         </article>
+      </div>
+
+      <div class="container-list" id="container-list">
         <section class="task-list">
           <nz-table
+            class="table"
             #basicTable
             [nzData]="allTasks"
             [nzPageSize]="pageSize"

@@ -18,12 +18,10 @@ nz-content
     width: 35rem
     margin-top: 1rem
     margin-bottom: 3rem
-
-  .title-create
     margin-left: 35rem
+  .title-create
 
   .title-list
-    margin-left: 24rem
 
 .word-waves
 
@@ -95,9 +93,11 @@ nz-content
   margin-top: 2rem
 
 .container-list
-  margin-top: 4rem
   margin-bottom: 2rem
   text-align: center
+
+.container-list-title
+  margin-top: 2rem
 
 .task-list
   border: 0.3rem solid #10b981
@@ -121,6 +121,23 @@ nz-content
 .icon-delete:hover
   font-size: 1.4rem
 
+@media screen and (max-width: 1300px)
+  .task-list
+    max-width: 64rem
+    overflow: hidden
+
+@media screen and (max-width: 1030px)
+  .container
+    max-width: 58rem
+    padding: 1rem
+
+  .task-list
+    max-width: 56rem
+    padding: 1rem
+    overflow: hidden
+
+    .table
+      font-size: 12px
 @keyframes animation
   0%, 100%
     clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%)
