@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -16,7 +16,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   public taskForm: FormGroup = {} as FormGroup;
 
   public tasks: ITask[] = [];
@@ -27,6 +27,7 @@ export class HomeComponent {
   public pageSize: number = 4;
   public total: number = 0;
   public allTasks: ITask[] = [];
+  public isLoading: boolean = false;
 
   constructor(
     private fb: NonNullableFormBuilder,
@@ -70,6 +71,7 @@ export class HomeComponent {
 
   public submitForm(): void {
     if (this.taskForm.valid) {
+      this.isLoading = true;
       if (this.isCreating) {
         this.createTasks();
       } else {
@@ -136,6 +138,7 @@ export class HomeComponent {
         this.toastr.success('Tarefa criada com sucesso!');
         this.taskForm.reset();
         this.listTasks();
+        this.isLoading = false;
         this.navToListTasks();
       },
       (error) => {
@@ -148,6 +151,7 @@ export class HomeComponent {
             'Ocorreu um erro ao criar a tarefa. Por favor, tente novamente.'
           );
         }
+        this.isLoading = false;
       }
     );
   }
@@ -241,6 +245,7 @@ export class HomeComponent {
         this.isCreating = true;
         this.titleButton = 'Cadastrar';
         this.navToListTasks();
+        this.isLoading = false;
       },
       (error) => {
         if (error.status === 400) {
@@ -252,6 +257,7 @@ export class HomeComponent {
             'Ocorreu um erro ao atualizar a tarefa. Por favor, tente novamente.'
           );
         }
+        this.isLoading = false;
       }
     );
   }

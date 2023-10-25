@@ -46,11 +46,22 @@
     </div>
     <div class="container-button">
       <button
+        *ngIf="!isLoading"
         nz-button
         class="login-form-button login-form-margin button-login"
         [nzType]="'primary'"
       >
-        Register
+        <span> Register</span>
+      </button>
+
+      <button
+        *ngIf="isLoading"
+        nz-button
+        nzLoading
+        class="login-form-button login-form-margin button-login"
+        [nzType]="'primary'"
+      >
+        <span nz-icon nzType="poweroff"></span>
       </button>
     </div>
   </form>

@@ -111,11 +111,22 @@
           </div>
 
           <button
+            *ngIf="!isLoading"
             nz-button
             class="login-form-button login-form-margin button-task"
             [nzType]="'primary'"
           >
             {{ titleButton }}
+          </button>
+
+          <button
+            *ngIf="isLoading"
+            nz-button
+            nzLoading
+            class="login-form-button login-form-margin button-task"
+            [nzType]="'primary'"
+          >
+            <span nz-icon nzType="poweroff"></span>
           </button>
         </form>
       </section>

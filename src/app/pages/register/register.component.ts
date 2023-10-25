@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormControl,
-  FormBuilder,
   NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
@@ -17,16 +16,13 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.sass'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   public userForm: FormGroup<{
     name: FormControl<string>;
     username: FormControl<string>;
     password: FormControl<string>;
-  }> = this.fb.group({
-    name: ['', [Validators.required]],
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
-  });
+  }> = {} as FormGroup;
+  public isLoading: boolean = false;
 
   constructor(
     private fb: NonNullableFormBuilder,
@@ -36,10 +32,22 @@ export class RegisterComponent {
     private toastr: ToastrService
   ) {}
 
+  public ngOnInit(): void {
+    this.initializeVariables();
+  }
+
+  private initializeVariables(): void {
+    this.userForm = this.fb.group({
+      name: ['', [Validators.required]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+    });
+  }
+
   public submitForm(): void {
     if (this.userForm.valid) {
       console.log('submit', this.userForm.value);
-
+      this.isLoading = true;
       const user: IUser = {
         name: this.userForm.value.name,
         username: this.userForm.value.username,
@@ -53,6 +61,7 @@ export class RegisterComponent {
           console.log(savedUser);
           this.toastr.success('Usuário criado com sucesso!');
           this.router.navigate(['/home']);
+          this.isLoading = false;
         },
         (error) => {
           if (error.status === 400) {
@@ -64,6 +73,8 @@ export class RegisterComponent {
               'Ocorreu um erro ao criar o usuário. Por favor, tente novamente.'
             );
           }
+
+          this.isLoading = false;
         }
       );
     } else {
