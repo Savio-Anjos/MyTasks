@@ -11,7 +11,11 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
-
+//import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+//import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { PageNotFoundModule } from './pages/page-not-found/page-not-found.module';
 registerLocaleData(en);
 
 @NgModule({
@@ -24,6 +28,7 @@ registerLocaleData(en);
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    PageNotFoundModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, CookieService],
   bootstrap: [AppComponent],

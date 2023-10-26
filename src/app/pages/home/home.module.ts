@@ -21,7 +21,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { DatePipe } from '@angular/common';
 
 @NgModule({
-  declarations: [HomeComponent, HeaderComponent, FooterComponent],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -35,6 +35,7 @@ import { DatePipe } from '@angular/common';
     NzIconModule,
     NzTableModule,
     NzPaginationModule,
+    ComponentsModule,
   ],
   providers: [DatePipe],
 })
