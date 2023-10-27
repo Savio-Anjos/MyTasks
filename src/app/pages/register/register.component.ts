@@ -17,11 +17,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./register.component.sass'],
 })
 export class RegisterComponent implements OnInit {
-  public userForm: FormGroup<{
-    name: FormControl<string>;
-    username: FormControl<string>;
-    password: FormControl<string>;
-  }> = {} as FormGroup;
+  public userForm: FormGroup = {} as FormGroup;
   public isLoading: boolean = false;
 
   constructor(
