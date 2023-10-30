@@ -2,9 +2,9 @@ import { FormControl } from '@angular/forms';
 
 export interface ITask {
   id: string;
-  title: string | undefined;
-  description: string | undefined;
-  priority: string | undefined;
+  title: string;
+  description: string;
+  priority: string;
   startAt: string;
   endAt: string;
   startAtDate?: string | null;
