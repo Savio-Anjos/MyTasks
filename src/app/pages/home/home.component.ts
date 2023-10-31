@@ -1,15 +1,9 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormRecord,
-  NonNullableFormBuilder,
-  Validators,
-} from '@angular/forms';
-import { ITask } from 'src/app/interfaces/task.interface';
-import { HomeService } from './home.service';
-import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
+import { HomeService } from './home.service';
+import { ITask } from 'src/app/interfaces/task.interface';
+import { ToastrService } from 'ngx-toastr';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -17,24 +11,23 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent implements OnInit {
-  public taskForm: FormGroup = {} as FormGroup;
-
-  public tasks: ITask[] = [];
-  public isCreating: boolean = true;
-  public titleButton: string = '';
   private id: string = '';
+  public allTasks: ITask[] = [];
+  public isCreating: boolean = true;
+  public isLoading: boolean = false;
   public pageIndex: number = 1;
   public pageSize: number = 4;
+  public taskForm: FormGroup = {} as FormGroup;
+  public tasks: ITask[] = [];
+  public titleButton: string = '';
   public total: number = 0;
-  public allTasks: ITask[] = [];
-  public isLoading: boolean = false;
 
   constructor(
+    private datePipe: DatePipe,
+    private el: ElementRef,
     private fb: NonNullableFormBuilder,
     private homeService: HomeService,
-    private toastr: ToastrService,
-    private datePipe: DatePipe,
-    private el: ElementRef
+    private toastr: ToastrService
   ) {}
 
   public ngOnInit(): void {
@@ -130,11 +123,11 @@ export class HomeComponent implements OnInit {
       startAt: startAtTrated,
       endAt: endAtTrated,
     };
-    console.log(task);
+    task;
 
     this.homeService.createTask(task).subscribe(
       (task: ITask) => {
-        console.log(task);
+        task;
         this.toastr.success('Tarefa criada com sucesso!');
         this.taskForm.reset();
         this.listTasks();
@@ -164,7 +157,7 @@ export class HomeComponent implements OnInit {
       this.total = tasks.length;
       this.loadData();
 
-      console.log(this.tasks);
+      this.tasks;
     });
 
     return this.tasks;
@@ -222,8 +215,8 @@ export class HomeComponent implements OnInit {
   public updateTask(): void {
     const taskForm: ITask = this.taskForm.value;
 
-    const startDateFormated = `${taskForm.startAt}T${taskForm.startAtTime}`;
-    const endDateFormated = `${taskForm.endAt}T${taskForm.endAtTime}`;
+    const startDateFormated: string = `${taskForm.startAt}T${taskForm.startAtTime}`;
+    const endDateFormated: string = `${taskForm.endAt}T${taskForm.endAtTime}`;
 
     const dataTask: ITask = {
       id: this.id,
@@ -234,11 +227,9 @@ export class HomeComponent implements OnInit {
       endAt: endDateFormated,
     };
 
-    console.log(dataTask);
-
     this.homeService.updateTask(this.id, dataTask).subscribe(
       (task) => {
-        console.log(task);
+        task;
         this.toastr.success('Tarefa Atualizada com sucesso!');
         this.taskForm.reset();
         this.listTasks();
@@ -263,8 +254,8 @@ export class HomeComponent implements OnInit {
   }
 
   public loadData(): void {
-    const startIndex = (this.pageIndex - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
+    const startIndex: number = (this.pageIndex - 1) * this.pageSize;
+    const endIndex: number = startIndex + this.pageSize;
     this.tasks = this.allTasks.slice(startIndex, endIndex);
   }
 

@@ -1,6 +1,6 @@
+import { delay, Observable, take } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, delay, take } from 'rxjs';
 import { ITask } from 'src/app/interfaces/task.interface';
 import { IUser } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/shared/user.service';
@@ -15,7 +15,7 @@ export class HomeService {
 
   private getAuthorization(): HttpHeaders {
     const user: IUser = this.userService.getUser();
-    console.log(user);
+
     const authHeader: string = `Basic ${btoa(
       `${user.username}:${user.password}`
     )}`;

@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  NonNullableFormBuilder,
-  Validators,
-} from '@angular/forms';
-import { RegisterService } from './register.service';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { IUser } from 'src/app/interfaces/user.interface';
-import { UserService } from './../../shared/user.service';
+import { RegisterService } from './register.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from './../../shared/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,15 +12,15 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./register.component.sass'],
 })
 export class RegisterComponent implements OnInit {
-  public userForm: FormGroup = {} as FormGroup;
   public isLoading: boolean = false;
+  public userForm: FormGroup = {} as FormGroup;
 
   constructor(
     private fb: NonNullableFormBuilder,
     private registerService: RegisterService,
-    private userService: UserService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private userService: UserService
   ) {}
 
   public ngOnInit(): void {
@@ -42,7 +37,6 @@ export class RegisterComponent implements OnInit {
 
   public submitForm(): void {
     if (this.userForm.valid) {
-      console.log('submit', this.userForm.value);
       this.isLoading = true;
       const user: IUser = {
         name: this.userForm.value.name,
