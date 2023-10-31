@@ -63,6 +63,7 @@ export class HomeComponent implements OnInit {
   }
 
   public submitForm(): void {
+    console.log(this.taskForm.value);
     if (this.taskForm.valid) {
       this.isLoading = true;
       if (this.isCreating) {

@@ -47,11 +47,11 @@
             <nz-form-control
               nzErrorTip="Por favor digite o nível de prioridade!"
             >
-              <input
-                nz-input
-                placeholder="Prioridade"
-                formControlName="priority"
-              />
+              <nz-select formControlName="priority" nzPlaceHolder="Prioridade">
+                <nz-option nzValue="Baixa" nzLabel="Baixa"></nz-option>
+                <nz-option nzValue="Media" nzLabel="Media"></nz-option>
+                <nz-option nzValue="Alta" nzLabel="Alta"></nz-option>
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
 

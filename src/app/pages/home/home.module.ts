@@ -12,6 +12,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -30,6 +31,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NzIconModule,
     NzTableModule,
     NzPaginationModule,
+    NzSelectModule,
     ComponentsModule,
   ],
   providers: [DatePipe],
