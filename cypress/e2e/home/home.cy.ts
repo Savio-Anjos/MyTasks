@@ -4,6 +4,13 @@ import { IUser } from 'src/app/interfaces/user.interface';
 import { enUS } from 'date-fns/locale';
 import { format } from 'date-fns';
 
+interface IFormattedDates {
+  startAt: string;
+  endAt: string;
+  startAtTime: string;
+  endAtTime: string;
+}
+
 let user: IUser = {} as IUser;
 let task: ITask = {} as ITask;
 
@@ -17,9 +24,22 @@ function generateUserData(): void {
   };
 }
 
-function generateFormattedDate(): string {
-  const date = faker.date.between(new Date(), new Date(2024, 11, 31));
-  return format(date, 'yyyy-MM-dd', { locale: enUS });
+function generateFormattedDate(): IFormattedDates {
+  const startAt: Date = faker.date.between(new Date(), new Date(2023, 11, 31));
+  const endAt: Date = faker.date.between(
+    new Date(2024, 1, 1),
+    new Date(2024, 11, 31)
+  );
+  const startAtTime = faker.date.recent();
+  const endAtTime = faker.date.recent();
+
+  const formattedDates: IFormattedDates = {
+    startAt: format(startAt, 'yyyy-MM-dd', { locale: enUS }),
+    endAt: format(endAt, 'yyyy-MM-dd', { locale: enUS }),
+    startAtTime: format(startAtTime, 'HH:mm', { locale: enUS }),
+    endAtTime: format(endAtTime, 'HH:mm', { locale: enUS }),
+  };
+  return formattedDates;
 }
 
 function generateTaskData(): void {
@@ -28,8 +48,12 @@ function generateTaskData(): void {
     length: { min: 10, max: 18 },
   });
   const priority: string = faker.string.alpha(4);
-  const startAt: string = generateFormattedDate();
-  const endAt: string = generateFormattedDate();
+  const formattedDates: IFormattedDates = generateFormattedDate();
+
+  const startAt: string = formattedDates.startAt;
+  const endAt: string = formattedDates.endAt;
+  const startAtTime: string = formattedDates.startAtTime;
+  const endAtTime: string = formattedDates.endAtTime;
 
   task = {
     id: '',
@@ -38,26 +62,45 @@ function generateTaskData(): void {
     priority,
     startAt,
     endAt,
+    startAtTime,
+    endAtTime,
   };
 }
 generateUserData();
 generateTaskData();
 
+function registerUser(): void {
+  cy.visit('/register');
+  cy.get('input[formcontrolname="name"]').type(user.name);
+  cy.get('input[formcontrolname="username"]').type(user.username);
+  cy.get('input[formcontrolname="password"').type(user.password);
+  cy.get('.login-form-button').click();
+  cy.wait(6000);
+  cy.url().should('include', '/home');
+}
+
 describe('Home Page', () => {
-  it('Create Task', () => {
-    cy.visit('/register');
-    cy.get('input[formcontrolname="name"]').type(user.name);
-    cy.get('input[formcontrolname="username"]').type(user.username);
-    cy.get('input[formcontrolname="password"').type(user.password);
-    cy.get('.login-form-button').click();
-    cy.wait(6000);
-    cy.url().should('include', '/home');
+  it('Validate task form', () => {
+    registerUser();
 
     cy.get('input[formcontrolname="title"]').type(task.title);
+    cy.get('.login-form-button').click();
+    cy.get('.ant-form-item-explain-error').should('be.visible');
     cy.get('input[formcontrolname="description"').type(task.description);
+    cy.get('.login-form-button').click();
+    cy.get('.ant-form-item-explain-error').should('be.visible');
     cy.get('input[formcontrolname="priority"]').type(task.priority);
-    cy.get('input[formcontrolname="title"]').type(task.startAt);
+    cy.get('.login-form-button').click();
+    cy.get('.ant-form-item-explain-error').should('be.visible');
     cy.get('input[formcontrolname="startAt"]').type(task.startAt);
+    cy.get('.login-form-button').click();
+    cy.get('.ant-form-item-explain-error').should('be.visible');
     cy.get('input[formcontrolname="endAt"]').type(task.endAt);
+    cy.get('.login-form-button').click();
+    cy.get('.ant-form-item-explain-error').should('be.visible');
+    cy.get('input[formcontrolname="startAtTime"]').type(task.startAtTime ?? '');
+    cy.get('.login-form-button').click();
+    cy.get('.ant-form-item-explain-error').should('be.visible');
+    cy.get('input[formcontrolname="endAtTime"]').type(task.endAtTime ?? '');
   });
 });
