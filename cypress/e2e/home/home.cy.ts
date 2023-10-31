@@ -30,8 +30,8 @@ function generateFormattedDate(): IFormattedDates {
     new Date(2024, 1, 1),
     new Date(2024, 11, 31)
   );
-  const startAtTime = faker.date.recent();
-  const endAtTime = faker.date.recent();
+  const startAtTime: Date = faker.date.recent();
+  const endAtTime: Date = faker.date.recent();
 
   const formattedDates: IFormattedDates = {
     startAt: format(startAt, 'yyyy-MM-dd', { locale: enUS }),
@@ -77,6 +77,12 @@ function registerUser(): void {
   cy.get('.login-form-button').click();
   cy.wait(6000);
   cy.url().should('include', '/home');
+  generateUserData();
+}
+
+function checkAlert(): void {
+  cy.get('.login-form-button').click();
+  cy.get('.ant-form-item-explain-error').should('be.visible');
 }
 
 describe('Home Page', () => {
@@ -84,23 +90,34 @@ describe('Home Page', () => {
     registerUser();
 
     cy.get('input[formcontrolname="title"]').type(task.title);
-    cy.get('.login-form-button').click();
-    cy.get('.ant-form-item-explain-error').should('be.visible');
+    checkAlert();
     cy.get('input[formcontrolname="description"').type(task.description);
-    cy.get('.login-form-button').click();
-    cy.get('.ant-form-item-explain-error').should('be.visible');
+    checkAlert();
     cy.get('input[formcontrolname="priority"]').type(task.priority);
-    cy.get('.login-form-button').click();
-    cy.get('.ant-form-item-explain-error').should('be.visible');
+    checkAlert();
     cy.get('input[formcontrolname="startAt"]').type(task.startAt);
-    cy.get('.login-form-button').click();
-    cy.get('.ant-form-item-explain-error').should('be.visible');
+    checkAlert();
     cy.get('input[formcontrolname="endAt"]').type(task.endAt);
-    cy.get('.login-form-button').click();
-    cy.get('.ant-form-item-explain-error').should('be.visible');
+    checkAlert();
     cy.get('input[formcontrolname="startAtTime"]').type(task.startAtTime ?? '');
-    cy.get('.login-form-button').click();
-    cy.get('.ant-form-item-explain-error').should('be.visible');
+    checkAlert();
     cy.get('input[formcontrolname="endAtTime"]').type(task.endAtTime ?? '');
+  });
+
+  it('Create Task', () => {
+    registerUser();
+
+    cy.get('input[formcontrolname="title"]').type(task.title);
+    cy.get('input[formcontrolname="description"').type(task.description);
+    cy.get('input[formcontrolname="priority"]').type(task.priority);
+    cy.get('input[formcontrolname="startAt"]').type(task.startAt);
+    cy.get('input[formcontrolname="endAt"]').type(task.endAt);
+    cy.get('input[formcontrolname="startAtTime"]').type(task.startAtTime ?? '');
+    cy.get('input[formcontrolname="endAtTime"]').type(task.endAtTime ?? '');
+    cy.get('.login-form-button').click();
+    cy.wait(1000);
+    cy.get('.toast-success').should('be.visible');
+    cy.wait(2000);
+    cy.get('.ant-table-cell').should('be.visible');
   });
 });
