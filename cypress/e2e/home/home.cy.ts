@@ -93,7 +93,8 @@ describe('Home Page', () => {
     checkAlert();
     cy.get('input[formcontrolname="description"').type(task.description);
     checkAlert();
-    cy.get('input[formcontrolname="priority"]').type(task.priority);
+    cy.get('nz-select[formcontrolname="priority"]').click();
+    cy.get('.ant-select-item-option-content').first().click();
     checkAlert();
     cy.get('input[formcontrolname="startAt"]').type(task.startAt);
     checkAlert();
@@ -109,7 +110,8 @@ describe('Home Page', () => {
 
     cy.get('input[formcontrolname="title"]').type(task.title);
     cy.get('input[formcontrolname="description"').type(task.description);
-    cy.get('input[formcontrolname="priority"]').type(task.priority);
+    cy.get('nz-select[formcontrolname="priority"]').click();
+    cy.get('.ant-select-item-option-content').first().click();
     cy.get('input[formcontrolname="startAt"]').type(task.startAt);
     cy.get('input[formcontrolname="endAt"]').type(task.endAt);
     cy.get('input[formcontrolname="startAtTime"]').type(task.startAtTime ?? '');
