@@ -4,6 +4,19 @@
     <section class="container-button-nav">
       <button type="button" (click)="navToCreate()">Criar Tarefa</button>
       <button type="button" (click)="navToList()">Listar Tarefas</button>
+
+      <nz-switch
+        (click)="toggleTheme()"
+        [ngModel]="false"
+        [nzCheckedChildren]="checkedTemplate"
+        [nzUnCheckedChildren]="unCheckedTemplate"
+      ></nz-switch>
+      <ng-template #checkedTemplate>
+        <span class="material-symbols-outlined"> dark_mode </span>
+      </ng-template>
+      <ng-template #unCheckedTemplate>
+        <span class="material-symbols-outlined"> light_mode </span>
+      </ng-template>
     </section>
   </nav>
 </nz-header>

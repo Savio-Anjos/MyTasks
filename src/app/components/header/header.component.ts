@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ThemeService } from 'src/app/shared/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -6,9 +7,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent {
-  constructor() {}
   @Output() navToCreateTask = new EventEmitter<void>();
   @Output() navToListTasks = new EventEmitter<void>();
+
+  constructor(private themeService: ThemeService) {}
 
   public navToCreate(): void {
     this.navToCreateTask.emit();
@@ -16,5 +18,9 @@ export class HeaderComponent {
 
   public navToList(): void {
     this.navToListTasks.emit();
+  }
+
+  public toggleTheme(): void {
+    this.themeService.setTheme();
   }
 }

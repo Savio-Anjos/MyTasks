@@ -4,6 +4,7 @@ import { HomeService } from './home.service';
 import { ITask } from 'src/app/interfaces/task.interface';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { ThemeService } from 'src/app/shared/theme.service';
 
 @Component({
   selector: 'app-home',
@@ -21,18 +22,21 @@ export class HomeComponent implements OnInit {
   public tasks: ITask[] = [];
   public titleButton: string = '';
   public total: number = 0;
+  public theme: string = '';
 
   constructor(
     private datePipe: DatePipe,
     private el: ElementRef,
     private fb: NonNullableFormBuilder,
     private homeService: HomeService,
+    private themeService: ThemeService,
     private toastr: ToastrService
   ) {}
 
   public ngOnInit(): void {
     this.initializeVariables();
     this.listTasks();
+    this.getTheme();
   }
 
   private initializeVariables(): void {
@@ -46,6 +50,15 @@ export class HomeComponent implements OnInit {
       endAtTime: ['', [Validators.required]],
     });
     this.titleButton = 'Cadastrar';
+    this.theme = 'dark';
+  }
+
+  public getTheme(): void {
+    this.themeService.getTheme().subscribe((theme) => {
+      this.theme = theme;
+    });
+
+    console.log(this.theme);
   }
 
   public navToCreateTask(): void {

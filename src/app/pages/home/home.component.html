@@ -4,7 +4,7 @@
     (navToListTasks)="navToListTasks()"
   ></app-header>
 
-  <nz-content class="content custom-scrollbar">
+  <nz-content [class]="'content custom-scrollbar ' + theme">
     <div class="input-tasks" id="input-tasks">
       <div>
         <article class="title-create">
@@ -47,7 +47,11 @@
             <nz-form-control
               nzErrorTip="Por favor selecione o nível de prioridade!"
             >
-              <nz-select formControlName="priority" nzPlaceHolder="Prioridade">
+              <nz-select
+                formControlName="priority"
+                nzPlaceHolder="Prioridade"
+                class="select"
+              >
                 <nz-option nzValue="Baixa" nzLabel="Baixa"></nz-option>
                 <nz-option nzValue="Media" nzLabel="Media"></nz-option>
                 <nz-option nzValue="Alta" nzLabel="Alta"></nz-option>
