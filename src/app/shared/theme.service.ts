@@ -22,7 +22,7 @@ export class ThemeService {
     } else {
       this.theme = 'light';
     }
-    console.log(this.theme);
+
     this.themeSubject.next(this.theme);
   }
 }

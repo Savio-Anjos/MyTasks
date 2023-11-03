@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
       this.registerService.createUser(user).subscribe(
         (user: IUser) => {
           const savedUser: IUser = this.userService.getUser();
-          console.log(savedUser);
+
           this.toastr.success('Usuário criado com sucesso!');
           this.router.navigate(['/home']);
           this.isLoading = false;

@@ -1,27 +1,77 @@
-# MyTasks
+<p align='center'><img width='400' src="./.github/logo.svg"/></p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
+ <p align='center'>
 
-## Development server
+<img src="https://img.shields.io/github/repo-size/Savio-Anjos/MyTasks?color=10b981">
+<img src="https://img.shields.io/github/languages/count/Savio-Anjos/MyTasks?color=10b981">
+<img src="https://img.shields.io/github/last-commit/Savio-Anjos/MyTasks?color=10b981">  
+</p>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🚀 Tecnologias
 
-## Code scaffolding
+Esse projeto está utilizando as seguintes tecnologias:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [Angular](https://angular.io/)
+- [AntDesign](https://ng.ant.design/docs/introduce/en)
+- [Cypress](https://www.cypress.io/)
 
-## Build
+## 📜 Descrição
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Esse projeto é um desafio pessoal que fiz para reforçar os conhecimentos em Angular e TypeScript, nele utilizei todos os principais conceitos e as principais funcionalidades do Angular.
 
-## Running unit tests
+## ⚙️ Como funciona?
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- O usuário deve se cadastrar para utilizar as funcionalidades;
+- Após o cadastro as informações são salvas para manter o usuário logado;
+- O usuário pode criar uma tarefa;
+- O usuário pode listar as próprias taferas;
+- O usuário pode atualizar as próprias taferas;
+- O usuário pode deletar as próprias taferas;
 
-## Running end-to-end tests
+## 🎲 Quer customizar o projeto?
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Clone esse repositório
 
-## Further help
+```bash
+git clone https://github.com/Savio-Anjos/MyTasks.git
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Navegue até o diretório do projeto
+
+```bash
+cd MyTasks
+```
+
+### Instale as dependências
+
+```bash
+npm i
+```
+
+```bash
+yarn
+```
+
+### Inicie a aplicação
+
+```bash
+ng serve
+```
+
+## 🖼️ Layout
+
+### Register
+
+<img src=".github/register.png" />
+
+### Create Task
+
+<img src=".github/createTask.png" />
+
+### List Task
+
+<img src=".github/listTask.png" />
+
+---
+
+<p>Criado com 💙 por <a href='https://github.com/Savio-Anjos/' target='_blank'>Sávio Anjos</a></p>
