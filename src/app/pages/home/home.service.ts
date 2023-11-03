@@ -9,7 +9,7 @@ import { UserService } from 'src/app/shared/user.service';
   providedIn: 'root',
 })
 export class HomeService {
-  private readonly API: string = 'http://localhost:8080/tasks/';
+  private readonly API: string = 'https://api-java-1b7m.onrender.com/tasks/';
 
   constructor(private http: HttpClient, private userService: UserService) {}
 
