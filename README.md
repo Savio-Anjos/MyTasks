@@ -64,11 +64,11 @@ ng serve
 
 <img src=".github/register.png" />
 
-### Create Task
+### Create Tasks
 
 <img src=".github/createTask.png" />
 
-### List Task
+### List Tasks
 
 <img src=".github/listTask.png" />
 
