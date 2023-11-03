@@ -3,6 +3,7 @@ import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { IUser } from 'src/app/interfaces/user.interface';
 import { RegisterService } from './register.service';
 import { Router } from '@angular/router';
+import { ThemeService } from 'src/app/shared/theme.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from './../../shared/user.service';
 
@@ -14,17 +15,20 @@ import { UserService } from './../../shared/user.service';
 export class RegisterComponent implements OnInit {
   public isLoading: boolean = false;
   public userForm: FormGroup = {} as FormGroup;
+  public theme: string = '';
 
   constructor(
     private fb: NonNullableFormBuilder,
     private registerService: RegisterService,
     private router: Router,
+    private themeService: ThemeService,
     private toastr: ToastrService,
     private userService: UserService
   ) {}
 
   public ngOnInit(): void {
     this.initializeVariables();
+    this.getTheme();
   }
 
   private initializeVariables(): void {
@@ -32,6 +36,12 @@ export class RegisterComponent implements OnInit {
       name: ['', [Validators.required]],
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
+    });
+  }
+
+  public getTheme(): void {
+    this.themeService.getTheme().subscribe((theme) => {
+      this.theme = theme;
     });
   }
 

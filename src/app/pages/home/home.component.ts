@@ -57,8 +57,6 @@ export class HomeComponent implements OnInit {
     this.themeService.getTheme().subscribe((theme) => {
       this.theme = theme;
     });
-
-    console.log(this.theme);
   }
 
   public navToCreateTask(): void {

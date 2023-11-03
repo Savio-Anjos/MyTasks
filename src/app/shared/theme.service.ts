@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class ThemeService {
-  private theme: string = 'light';
+  private theme: string = 'dark';
   private themeSubject: BehaviorSubject<string> = new BehaviorSubject<string>(
     this.theme
   );
