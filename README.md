@@ -19,6 +19,8 @@ Esse projeto está utilizando as seguintes tecnologias:
 
 Esse projeto é um desafio pessoal que fiz para reforçar os conhecimentos em Angular e TypeScript, nele utilizei todos os principais conceitos e as principais funcionalidades do Angular.
 
+Esse projeto está utilizando essa: - [API](https://github.com/Savio-Anjos/JAVA-Todo-List)
+
 ## ⚙️ Como funciona?
 
 - O usuário deve se cadastrar para utilizar as funcionalidades;
